@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+streamlit
+ollama
+llama-index
+chromadb
+pymupdf
+python-dotenv
+pydantic
+requests
