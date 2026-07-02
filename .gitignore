@@ -8,3 +8,11 @@ env/
 .env
 #database files
 *.db
+
+.pytest_cache/
+vectorstore/*
+!vectorstore/.gitkeep
+uploads/*
+!uploads/.gitkeep
+cache/*
+!cache/.gitkeep
