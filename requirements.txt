@@ -3,6 +3,8 @@ uvicorn
 streamlit
 ollama
 llama-index
+llama-index-vector-stores-chroma
+llama-index-embeddings-ollama
 chromadb
 pymupdf
 python-dotenv
