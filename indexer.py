@@ -7,7 +7,7 @@ from llama_index.core.node_parser import SentenceSplitter
 from llama_index.vector_stores.chroma import ChromaVectorStore
 import fitz  # PyMuPDF
 
-from .rag import pdf_loader
+import pdf_loader
 
 VECTORSTORE_DIR = Path(__file__).parent.parent / "vectorstore"
 COLLECTION_NAME = "research_agent_docs"
