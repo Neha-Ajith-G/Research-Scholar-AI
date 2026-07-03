@@ -18,17 +18,18 @@ def get_agent() -> Any:
 @app.post("/query", response_model=AgentResponse)
 async def query_agent(request: AgentRequest, agent: Any = Depends(get_agent)):
     try:
-        # Config tells LangGraph which thread history to load/save
-        config = {"configurable": {"thread_id": "default_user_session"}}
-        
-        # Pass the message AND the thread configuration parameter
+        # Fix 4: thread_id now comes from the request instead of being
+        # hardcoded, so each conversation gets its own isolated history
+        # in the checkpointer instead of one thread shared by everyone.
+        config = {"configurable": {"thread_id": request.session_id}}
+
         response = await agent.ainvoke(
             {"messages": [("user", request.question)]},
             config=config
-        )       
+        )
         final_message = response["messages"][-1].content
-        
-        return AgentResponse(output=final_message)
+
+        return AgentResponse(output=final_message, session_id=request.session_id)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Agent Execution Failure: {str(e)}")
 
